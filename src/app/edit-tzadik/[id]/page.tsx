@@ -6,11 +6,11 @@ import { redirect } from "next/navigation";
 export default async function EditTzadik({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const id = parseInt(params.id);
+  const { id } = await params;
   const tzadik = await prisma.tzadik.findUnique({
-    where: { id },
+    where: { id: parseInt(id) },
     include: { community: true },
   });
 
@@ -37,7 +37,7 @@ export default async function EditTzadik({
       communityConnect = { connect: { name: communityName } };
     }
     await prisma.tzadik.update({
-      where: { id },
+      where: { id: parseInt(id) },
       data: {
         name: formData.get("name") as string,
         gender: formData.get("gender") as Gender,
