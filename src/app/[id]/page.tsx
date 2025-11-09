@@ -92,7 +92,7 @@ export default async function Post({ params }: { params: { id: string } }) {
                   פרטים נוספים
                 </h2>
               </div>
-              <div className="flex flex-row justify-between border-b border-amber-100 px-6 py-4">
+              <div className="flex flex-row justify-between border-b border-amber-100 px-6 py-4 text-black">
                 <div>
                   {tzadik.birthDate && (
                     <div>
