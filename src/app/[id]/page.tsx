@@ -4,9 +4,10 @@ import DeleteButton from "./DeleteButton";
 import React from "react";
 import { HDate } from "@hebcal/core";
 import Link from "next/link";
+import { promises } from "dns";
 
-export default async function Post({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default async function Post({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const tzadik = await prisma.tzadik.findUnique({
     where: { id: parseInt(id) },
     include: { community: true },
